@@ -1,0 +1,16 @@
+CREATE TABLE `${tableName}` (
+
+#foreach($item in $sqlList)
+    ${item}
+#end
+`CREATE_USER_ID` varchar(50) DEFAULT NULL COMMENT '创建者id',
+`CREATE_USER_NAME` varchar(100) NOT NULL COMMENT '创建者名称',
+`UPDATE_TIME` datetime DEFAULT NULL COMMENT '更新时间',
+`CREATE_TIME` datetime NOT NULL COMMENT '创建时间',
+`ZONE_CODE` varchar(30) NOT NULL COMMENT '区划',
+`ZONE_NAME` varchar(100) NOT NULL COMMENT '区划名称',
+`UPDATE_USER_ID` varchar(50) DEFAULT NULL COMMENT '更新者id',
+`UPDATE_USER_NAME` varchar(100) DEFAULT NULL COMMENT '更新者名称',
+PRIMARY KEY (`ID`) USING BTREE
+
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='${tableComment}';

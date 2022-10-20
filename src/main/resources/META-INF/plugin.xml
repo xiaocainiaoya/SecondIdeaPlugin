@@ -1,0 +1,35 @@
+<idea-plugin>
+    <id>org.example.SecondIdeaPlugin</id>
+    <name>SecondIdeaPlugin</name>
+    <vendor email="xiaocainiaoya@foxmail.com" url="http://xxx.com">bosssoft</vendor>
+
+    <description><![CDATA[
+        For simple and quick generation of SQL script files<br>
+        <em>Tools that are easy to use</em>
+    ]]></description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+
+        <toolWindow id="gpxGeneratorSQL"
+                    secondary="true"
+                    anchor="right" factoryClass="cn.com.xiaocainiaoya.MyWindowFactory">
+
+        </toolWindow>
+    </extensions>
+
+    <!--<idea-version since-build="173.0"/>-->
+    <idea-version since-build="213.5744" until-build="*.*" />
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="MyAction" class="cn.com.xiaocainiaoya.MyAction" text="测试按钮"
+                description="MyActionDesc">
+            <add-to-group group-id="FileMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>

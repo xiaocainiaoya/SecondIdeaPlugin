@@ -1,0 +1,56 @@
+/**
+ * 脚本示例
+ */
+class ScriptExample extends AbstractScriptTpl {
+    /**
+     * 数据库版本
+     * @return
+     */
+    @Override
+    String getSourceVersion() {
+        return "V${sourceVersion}"
+    }
+
+    /**
+     * 数据库
+     * @return
+     */
+    @Override
+    String getDatabase() {
+        return "${database}"
+    }
+
+    /**
+     * 版本修改ID
+     * @return
+     */
+    @Override
+    String getChangeId() {
+        return "${fileName}"
+    }
+
+    /**
+     * 负责人
+     * @return
+     */
+    @Override
+    String getChangeUser() {
+        return "${author}"
+    }
+
+    @Override
+    List<SqlMeta> mainSql() {
+        return new ArrayList<SqlMeta>() {
+            {
+#foreach($item in $sqlList)
+                add(SqlMeta.build(
+                    "SELECT NOT EXISTS(SELECT * FROM `information_schema`.`COLUMNS` WHERE `table_schema` = '${database}' AND table_name = '${item.tableName}' AND column_name = '${item.columnName}' )",
+                    "${item.sql}"))
+
+#end
+
+            }
+        }
+    }
+}
+

@@ -1,0 +1,745 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="cn.com.xiaocainiaoya.form.MainForm">
+  <grid id="27dc6" binding="topPanel" layout-manager="FormLayout">
+    <rowspec value="center:862px:noGrow"/>
+    <colspec value="fill:699px:noGrow"/>
+    <constraints>
+      <xy x="20" y="20" width="706" height="870"/>
+    </constraints>
+    <properties>
+      <maximumSize width="699" height="917"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <tabbedpane id="f4142" binding="mainTabPanel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="200"/>
+          </grid>
+          <forms defaultalign-horz="false" defaultalign-vert="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="3b350" binding="generatorSqlPanel" layout-manager="FormLayout">
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:8dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <colspec value="fill:691px:grow"/>
+            <constraints>
+              <tabbedpane title="生成脚本"/>
+            </constraints>
+            <properties>
+              <preferredSize width="737" height="970"/>
+            </properties>
+            <border type="bevel-lowered"/>
+            <children>
+              <grid id="890ad" binding="databasePanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="10" bottom="0" right="10"/>
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <preferredSize width="256" height="60"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="5e171" class="javax.swing.JLabel" binding="databaseLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="100" height="-1"/>
+                        <preferred-size width="100" height="-1"/>
+                        <maximum-size width="100" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="数据库:"/>
+                      <verticalAlignment value="0"/>
+                      <verticalTextPosition value="0"/>
+                    </properties>
+                  </component>
+                  <component id="9032" class="javax.swing.JTextField" binding="databaseTextField">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="45"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                </children>
+              </grid>
+              <grid id="83a0e" binding="fileNamePanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="10" bottom="0" right="10"/>
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <preferredSize width="256" height="60"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="e88a2" class="javax.swing.JLabel" binding="fileNameLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="100" height="-1"/>
+                        <preferred-size width="100" height="-1"/>
+                        <maximum-size width="100" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="版本修改ID:"/>
+                    </properties>
+                  </component>
+                  <component id="352b9" class="javax.swing.JTextField" binding="fileNameTextField">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="45"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                </children>
+              </grid>
+              <grid id="fb47a" binding="authorPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="10" bottom="0" right="10"/>
+                <constraints>
+                  <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <preferredSize width="634" height="60"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="4e6a5" class="javax.swing.JLabel" binding="authorLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="100" height="-1"/>
+                        <preferred-size width="100" height="-1"/>
+                        <maximum-size width="100" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="负责人:"/>
+                    </properties>
+                  </component>
+                  <component id="185b3" class="javax.swing.JTextField" binding="authorTextField">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="150" height="45"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                </children>
+              </grid>
+              <grid id="63f3c" binding="sqlPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="10" bottom="0" right="10"/>
+                <constraints>
+                  <grid row="10" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <preferredSize width="634" height="340"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="747e4" class="javax.swing.JLabel" binding="sqlLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <minimum-size width="100" height="-1"/>
+                        <preferred-size width="100" height="-1"/>
+                        <maximum-size width="190" height="-1"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="SQL:"/>
+                    </properties>
+                  </component>
+                  <scrollpane id="11d1b">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <horizontalScrollBarPolicy value="30"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="987ff" class="javax.swing.JTextArea" binding="sqlTextArea">
+                        <constraints/>
+                        <properties>
+                          <lineWrap value="false"/>
+                          <text value=""/>
+                          <toolTipText value=""/>
+                        </properties>
+                      </component>
+                    </children>
+                  </scrollpane>
+                </children>
+              </grid>
+              <grid id="14ad6" binding="buttonPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="10" left="10" bottom="0" right="10"/>
+                <constraints>
+                  <grid row="12" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <minimumSize width="478" height="35"/>
+                  <preferredSize width="400" height="40"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="5d178" class="javax.swing.JRadioButton" binding="batchRadio">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <name value="batchRadio"/>
+                      <text value="插入数据"/>
+                    </properties>
+                  </component>
+                  <component id="8ce38" class="javax.swing.JRadioButton" binding="insertFieldRadio">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <name value="insertFieldRadio"/>
+                      <text value="插入字段"/>
+                    </properties>
+                  </component>
+                  <component id="95e65" class="javax.swing.JRadioButton" binding="updateFieldRadio">
+                    <constraints>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <name value="updateFieldRadio"/>
+                      <text value="修改字段"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="dc69e" binding="subButtonPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="16" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-horz="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="55a0e" class="javax.swing.JButton" binding="generatorButton">
+                    <constraints/>
+                    <properties>
+                      <text value="生成并执行"/>
+                    </properties>
+                  </component>
+                  <component id="6d69e" class="javax.swing.JButton" binding="generatorNoExecButton">
+                    <constraints/>
+                    <properties>
+                      <text value="生成不执行"/>
+                    </properties>
+                  </component>
+                  <component id="32eee" class="javax.swing.JButton" binding="testButton">
+                    <constraints/>
+                    <properties>
+                      <text value="测试"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="fc13" binding="buttonSecondPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="10" bottom="0" right="10"/>
+                <constraints>
+                  <grid row="14" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <preferredSize width="295" height="40"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="3ff40" class="javax.swing.JRadioButton" binding="mulSqlRedio">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <name value="mulSqlRedio"/>
+                      <text value="多行SQL"/>
+                    </properties>
+                  </component>
+                  <component id="ff11f" class="javax.swing.JRadioButton" binding="addIndexRedio">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <name value="addIndexRedio"/>
+                      <text value="添加索引"/>
+                    </properties>
+                  </component>
+                  <component id="24938" class="javax.swing.JRadioButton" binding="updateIndexRedio">
+                    <constraints>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                    </constraints>
+                    <properties>
+                      <name value="updateIndexRedio"/>
+                      <text value="修改索引"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="bb7cb" binding="tipPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                  <forms defaultalign-vert="false"/>
+                </constraints>
+                <properties>
+                  <minimumSize width="733" height="40"/>
+                  <preferredSize width="24" height="40"/>
+                </properties>
+                <border type="none" title="使用提示：请确保[配置]tab的第一项中[生成脚本路径]已保存生成.groovy文件路径已填写"/>
+                <children>
+                  <component id="27716" class="javax.swing.JLabel" binding="tipLabel">
+                    <constraints/>
+                    <properties>
+                      <text value=""/>
+                      <toolTipText value=""/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="cf4e6" binding="versionPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="10" left="10" bottom="0" right="10"/>
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <preferredSize width="256" height="60"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="e39d1" class="javax.swing.JLabel" binding="versionLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="100" height="17"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="数据库版本:"/>
+                    </properties>
+                  </component>
+                  <component id="38104" class="javax.swing.JTextField" binding="versionTextField">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="500" height="45"/>
+                      </grid>
+                    </constraints>
+                    <properties/>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+          <grid id="4a2f4" binding="configPanel" layout-manager="FormLayout">
+            <rowspec value="center:d:noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <rowspec value="top:3dlu:noGrow"/>
+            <rowspec value="center:max(d;4px):noGrow"/>
+            <colspec value="fill:d:grow"/>
+            <constraints>
+              <tabbedpane title="配置"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <grid id="2580e" binding="generatorSqlPathPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                <margin top="0" left="10" bottom="0" right="0"/>
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms top="10" left="0" bottom="0" right="0"/>
+                </constraints>
+                <properties>
+                  <minimumSize width="256" height="55"/>
+                  <preferredSize width="256" height="60"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="41d4a" class="javax.swing.JLabel" binding="generatorSqlPathLabel">
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="92" height="45"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="生成脚本路径:"/>
+                    </properties>
+                  </component>
+                  <component id="b6017" class="javax.swing.JTextField" binding="generatorSqlPathTextField">
+                    <constraints>
+                      <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                        <preferred-size width="530" height="45"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value=""/>
+                    </properties>
+                  </component>
+                  <component id="9aac7" class="javax.swing.JButton" binding="generatorPathButton">
+                    <constraints>
+                      <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false">
+                        <preferred-size width="40" height="45"/>
+                        <maximum-size width="40" height="45"/>
+                      </grid>
+                    </constraints>
+                    <properties>
+                      <text value="..."/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+              <grid id="53fdb" binding="datasourcePanel" layout-manager="FormLayout">
+                <rowspec value="center:d:noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <colspec value="fill:d:grow"/>
+                <constraints>
+                  <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <forms top="30" left="0" bottom="0" right="0" defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <preferredSize width="800" height="250"/>
+                </properties>
+                <border type="none" title="数据库连接"/>
+                <children>
+                  <grid id="a6816" binding="userNamePanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <forms top="10" left="10" bottom="0" right="0"/>
+                    </constraints>
+                    <properties>
+                      <preferredSize width="236" height="60"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="82c05" class="javax.swing.JLabel" binding="userNameLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                            <minimum-size width="100" height="-1"/>
+                            <preferred-size width="100" height="-1"/>
+                            <maximum-size width="100" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <text value="UserName:"/>
+                        </properties>
+                      </component>
+                      <component id="15e72" class="javax.swing.JTextField" binding="userNameField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="92aaf" binding="passowrdPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+                      <forms top="10" left="10" bottom="0" right="0"/>
+                    </constraints>
+                    <properties>
+                      <preferredSize width="236" height="60"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="bbd3b" class="javax.swing.JLabel" binding="passowrdLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="100" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <text value="Passourd:"/>
+                        </properties>
+                      </component>
+                      <component id="4ab37" class="javax.swing.JTextField" binding="passwordField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="80278" binding="dbPanel" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms top="10" left="10" bottom="0" right="0"/>
+                    </constraints>
+                    <properties>
+                      <preferredSize width="212" height="60"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="b67b4" class="javax.swing.JLabel" binding="dbUrlLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="100" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <text value="DBUrl:"/>
+                        </properties>
+                      </component>
+                      <component id="9a8c2" class="javax.swing.JTextField" binding="dbUrlTextField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="3" indent="0" use-parent-layout="false">
+                            <preferred-size width="150" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="58d68" binding="scriptPathPanel" layout-manager="FormLayout">
+                <rowspec value="center:d:noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <rowspec value="top:3dlu:noGrow"/>
+                <rowspec value="center:max(d;4px):noGrow"/>
+                <colspec value="fill:d:grow"/>
+                <constraints>
+                  <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+                  <forms top="30" left="0" bottom="0" right="0" defaultalign-horz="false"/>
+                </constraints>
+                <properties>
+                  <alignmentX value="0.5"/>
+                  <minimumSize width="500" height="100"/>
+                  <preferredSize width="800" height="320"/>
+                  <toolTipText value="执行脚本路径"/>
+                </properties>
+                <border type="none" title="执行脚本路径"/>
+                <children>
+                  <grid id="3820a" binding="scrpytPathPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="10" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms top="0" left="10" bottom="0" right="0"/>
+                    </constraints>
+                    <properties>
+                      <preferredSize width="256" height="60"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="4d320" class="javax.swing.JTextField" binding="scriptPathTextField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="525" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="6ebb2" class="javax.swing.JLabel" binding="scriptPathLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="执行脚本路径:"/>
+                        </properties>
+                      </component>
+                      <component id="762af" class="javax.swing.JButton" binding="scriptPathButton">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="40" height="45"/>
+                            <maximum-size width="40" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <text value="..."/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="cda3b" binding="customScriptPathPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms top="10" left="10" bottom="0" right="0"/>
+                    </constraints>
+                    <properties>
+                      <preferredSize width="256" height="60"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="d8c94" class="javax.swing.JLabel" binding="customScriptLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="定制脚本路径:"/>
+                        </properties>
+                      </component>
+                      <component id="d59d7" class="javax.swing.JTextField" binding="customScriptTextField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="2" indent="0" use-parent-layout="false">
+                            <preferred-size width="525" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="49900" class="javax.swing.JButton" binding="customScriptButton">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="40" height="45"/>
+                            <maximum-size width="40" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <text value="..."/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="1493f" binding="errorPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms top="10" left="10" bottom="0" right="0"/>
+                    </constraints>
+                    <properties>
+                      <preferredSize width="256" height="60"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="fa24c" class="javax.swing.JLabel" binding="errorLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                        </constraints>
+                        <properties>
+                          <text value="错误输出路径:"/>
+                        </properties>
+                      </component>
+                      <component id="e8843" class="javax.swing.JTextField" binding="errorTextField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false">
+                            <preferred-size width="525" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="bd487" class="javax.swing.JButton" binding="errorPathButton">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <preferred-size width="40" height="45"/>
+                            <maximum-size width="40" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <text value="..."/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                  <grid id="1b91b" binding="sqlOutputPanel" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+                    <margin top="0" left="0" bottom="0" right="0"/>
+                    <constraints>
+                      <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                      <forms top="10" left="10" bottom="0" right="0"/>
+                    </constraints>
+                    <properties>
+                      <preferredSize width="252" height="60"/>
+                    </properties>
+                    <border type="none"/>
+                    <children>
+                      <component id="ada15" class="javax.swing.JLabel" binding="sqlOutputLabel">
+                        <constraints>
+                          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
+                            <maximum-size width="200" height="-1"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <text value="SQL输出路径:"/>
+                        </properties>
+                      </component>
+                      <component id="1a3c3" class="javax.swing.JTextField" binding="sqlOutputTextField">
+                        <constraints>
+                          <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="0" fill="2" indent="0" use-parent-layout="false">
+                            <preferred-size width="527" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties/>
+                      </component>
+                      <component id="2ace7" class="javax.swing.JButton" binding="sqlOutputButton">
+                        <constraints>
+                          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="2" indent="0" use-parent-layout="false">
+                            <maximum-size width="40" height="45"/>
+                          </grid>
+                        </constraints>
+                        <properties>
+                          <text value="..."/>
+                        </properties>
+                      </component>
+                    </children>
+                  </grid>
+                </children>
+              </grid>
+              <grid id="1b7d8" binding="configButtonPanel" layout-manager="FlowLayout" hgap="5" vgap="5" flow-align="1">
+                <constraints>
+                  <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                  <forms/>
+                </constraints>
+                <properties>
+                  <preferredSize width="214" height="50"/>
+                </properties>
+                <border type="none"/>
+                <children>
+                  <component id="5be18" class="javax.swing.JButton" binding="saveConfigButton">
+                    <constraints/>
+                    <properties>
+                      <text value="保存配置"/>
+                    </properties>
+                  </component>
+                  <component id="40ab5" class="javax.swing.JButton" binding="execButton">
+                    <constraints/>
+                    <properties>
+                      <text value="执行脚本"/>
+                    </properties>
+                  </component>
+                </children>
+              </grid>
+            </children>
+          </grid>
+        </children>
+      </tabbedpane>
+    </children>
+  </grid>
+</form>
