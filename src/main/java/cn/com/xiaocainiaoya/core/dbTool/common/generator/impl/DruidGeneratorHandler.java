@@ -36,16 +36,24 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
 
     @Override
     public String insertBatchData(DataConfig config) {
-        String[] sqls = config.getSql().split(";");
+        String[] sqls = config.getSql().replace("\n", "").split("\\);");
 
         List<String> resultSqlList = new ArrayList<>();
 
         for(String sql : sqls){
-            if(sql.startsWith("\n")){
-                resultSqlList.add(sql.substring(1));
-            }else{
-                resultSqlList.add(sql);
+            if("\n".equals(sql)){
+                continue;
             }
+
+            if(sql.startsWith("\n")){
+                sql = sql.substring(1);
+            }
+
+            if(!sql.endsWith(")") && StrUtil.isNotBlank(sql)){
+                sql = sql + ")";
+            }
+
+            resultSqlList.add(sql);
         }
 
         List<InsertDataVisitorVo> insertDataVisitorVos = new ArrayList<>();
