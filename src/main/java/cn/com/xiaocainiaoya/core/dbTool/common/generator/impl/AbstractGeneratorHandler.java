@@ -23,7 +23,7 @@ public abstract class AbstractGeneratorHandler implements GeneratorHandler {
 
     protected static String FILE_DESC = "fileDesc";
 
-    protected static String DEL_SQL = "delSql";
+    protected static String DEL_SQL = "delSqlList";
 
     protected static String TABLE_NAME = "tableName";
 

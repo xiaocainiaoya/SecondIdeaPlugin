@@ -42,7 +42,10 @@ class ScriptExample extends AbstractScriptTpl {
     List<SqlMeta> mainSql() {
         return new ArrayList<SqlMeta>() {
             {
-                add(SqlMeta.build("", ''' ${delSql} '''))
+#foreach($item in $delSqlList)
+                add(SqlMeta.build("", ''' ${item} '''))
+#end
+
 #foreach($item in $sqlList)
                 add(SqlMeta.build("", ''' ${item} '''))
 #end

@@ -37,38 +37,57 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
     @Override
     public String insertBatchData(DataConfig config) {
         String[] sqls = config.getSql().replace("\n", "").split("\\);");
-
         List<String> resultSqlList = new ArrayList<>();
-
         for(String sql : sqls){
+            // 最后一行为换行符的情况
             if("\n".equals(sql)){
                 continue;
             }
-
+            // 每一条sql开头为换行符的情况
             if(sql.startsWith("\n")){
                 sql = sql.substring(1);
             }
-
+            // 每一条sql的结尾不是)的情况, 补充)
             if(!sql.endsWith(")") && StrUtil.isNotBlank(sql)){
                 sql = sql + ")";
             }
-
             resultSqlList.add(sql);
         }
-
+        // 将表名和主键提取出来
         List<InsertDataVisitorVo> insertDataVisitorVos = new ArrayList<>();
-
         for(String sql : resultSqlList){
             InsertDataVisitorVo insertDataVisitorVo = ParseHelper.getInsertInfo(sql);
             insertDataVisitorVos.add(insertDataVisitorVo);
         }
 
-        String delSql = StrUtil.format(DEL_SQL_TEMPLATE, insertDataVisitorVos.get(0).getFullTableName(), insertDataVisitorVos.stream().map(InsertDataVisitorVo::getId).collect(Collectors.joining(",")));
-
+        // 根据表名进行分组
+        Map<String, List<InsertDataVisitorVo>> delMap = insertDataVisitorVos.stream().collect(Collectors.groupingBy(InsertDataVisitorVo::getFullTableName));
+        // 根据表名拼接根据ID的删除语句
+        List<String> delSqls = new ArrayList<>();
+        for(String fullTableName : delMap.keySet()){
+            List<InsertDataVisitorVo> insertDataVisitorVoList = delMap.get(fullTableName);
+            // 若id过多, 防止出现in('ID')中内容过长, 按每条删除语句20个id进行拆分
+            if(insertDataVisitorVoList.size() > 20){
+                int count = insertDataVisitorVoList.size() / 20;
+                for(int i = 0; i < count; i++){
+                    List<InsertDataVisitorVo> subList = insertDataVisitorVoList.subList(i * 20, (i + 1) * 20);
+                    String delSql = StrUtil.format(DEL_SQL_TEMPLATE, fullTableName, subList.stream().map(InsertDataVisitorVo::getId).collect(Collectors.joining(",")));
+                    delSqls.add(delSql);
+                }
+                // 若有剩余的id, 则单独拼接一条删除语句
+                if(insertDataVisitorVoList.size() % 20 != 0){
+                    List<InsertDataVisitorVo> subList = insertDataVisitorVoList.subList(count * 20, insertDataVisitorVoList.size());
+                    String delSql = StrUtil.format(DEL_SQL_TEMPLATE, fullTableName, subList.stream().map(InsertDataVisitorVo::getId).collect(Collectors.joining(",")));
+                    delSqls.add(delSql);
+                }
+            }else{
+                delSqls.add(StrUtil.format(DEL_SQL_TEMPLATE, fullTableName, insertDataVisitorVoList.stream().map(InsertDataVisitorVo::getId).collect(Collectors.joining(","))));
+            }
+        }
 
         Map<String, Object> dataMap = MapUtil.of(SQL_LIST, resultSqlList);
         dataMap.put(FILE_DESC, config.getFileName());
-        dataMap.put(DEL_SQL, delSql);
+        dataMap.put(DEL_SQL, delSqls);
         return generatorBuilder.render("insertBatchData.vm", dataMap, config);
     }
 
