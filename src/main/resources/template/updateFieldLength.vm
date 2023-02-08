@@ -43,7 +43,7 @@ class ScriptExample extends AbstractScriptTpl {
         return new ArrayList<SqlMeta>() {
             {
 #foreach($item in $sqlList)
-                add(SqlMeta.build("SELECT EXISTS ( SELECT * FROM `information_schema`.`COLUMNS` WHERE `table_schema` = '${database}' AND table_name = '${tableName}' AND column_name = '${item.columnName}' )",
+                add(SqlMeta.build("SELECT EXISTS ( SELECT * FROM `information_schema`.`COLUMNS` WHERE `table_schema` = '${database}' AND table_name = '${item.tableName}' AND column_name = '${item.columnName}' )",
                     ''' ${item.sql} '''
                 ))
 #end
