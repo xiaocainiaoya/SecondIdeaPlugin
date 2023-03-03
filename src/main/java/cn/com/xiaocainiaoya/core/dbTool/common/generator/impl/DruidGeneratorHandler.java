@@ -4,6 +4,7 @@ import cn.com.xiaocainiaoya.core.dbTool.common.generator.GeneratorBuilder;
 import cn.com.xiaocainiaoya.core.dbTool.common.generator.vo.DataConfig;
 import cn.com.xiaocainiaoya.core.dbTool.common.generator.vo.HandleVo;
 import cn.com.xiaocainiaoya.core.parse.ParseHelper;
+import cn.com.xiaocainiaoya.core.parse.visitor.vo.CreateTableVo;
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.FieldVisitorVo;
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.IndexVisitorVo;
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.InsertDataVisitorVo;
@@ -112,6 +113,18 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
         //dataMap.put(TABLE_NAME, tableName);
         dataMap.put(FILE_DESC, config.getFileName());
         return generatorBuilder.render("insertFieldBatch.vm", dataMap, config);
+    }
+
+    @Override
+    public String createTable(DataConfig config) {
+        CreateTableVo createTableVo = ParseHelper.createTable(config.getSql());
+
+        Map<String, Object> dataMap = MapUtil.of(SQL, createTableVo.getSql());
+        //dataMap.put(TABLE_NAME, handleList.get(0).getTableName());
+        dataMap.put(FILE_DESC, config.getFileName());
+        dataMap.put(DATA_SCHEMA, createTableVo.getDatabase());
+        dataMap.put(TABLE_NAME, createTableVo.getTableName());
+        return generatorBuilder.render("buildTable.vm", dataMap, config);
     }
 
     @Override

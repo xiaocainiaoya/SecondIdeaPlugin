@@ -119,6 +119,8 @@ public class MainForm {
     private JButton errorPathButton;
     private JButton sqlOutputButton;
     private JButton generatorNoExecButton;
+    private JPanel buttonThreePanel;
+    private JRadioButton createTableButton;
 
     private Project project;
 
@@ -192,7 +194,7 @@ public class MainForm {
      * @return: void
      */
     private void radioListenerHandle(){
-        List<JRadioButton> radioButtons = Lists.newArrayList(batchRadio, insertFieldRadio, updateFieldRadio, addIndexRedio, updateIndexRedio, mulSqlRedio);
+        List<JRadioButton> radioButtons = Lists.newArrayList(batchRadio, insertFieldRadio, updateFieldRadio, addIndexRedio, updateIndexRedio, mulSqlRedio, createTableButton);
         RadioListener.setRadioListener(radioButtons, sqlTextArea);
     }
 
@@ -225,6 +227,9 @@ public class MainForm {
         }
         if(mulSqlRedio.isSelected()){
             return "7";
+        }
+        if(createTableButton.isSelected()){
+            return "9";
         }
         return null;
     }

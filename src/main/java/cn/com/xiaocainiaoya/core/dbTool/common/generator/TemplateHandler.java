@@ -146,6 +146,9 @@ public class TemplateHandler {
                 case "8":
                     //destPath = generatorHandler.createTableSqlByMd();
                     break;
+                case "9":
+                    destPath = generatorHandler.createTable(dataConfig);
+                    break;
                 default:
                     destPath = generatorHandler.other(dataConfig);
             }

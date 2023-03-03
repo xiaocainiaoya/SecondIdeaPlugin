@@ -1,9 +1,7 @@
 package cn.com.xiaocainiaoya.core.parse;
 
-import cn.com.xiaocainiaoya.core.parse.visitor.AlterFieldCustomVisitor;
-import cn.com.xiaocainiaoya.core.parse.visitor.FieldCustomVisitor;
-import cn.com.xiaocainiaoya.core.parse.visitor.IndexCustomVisitor;
-import cn.com.xiaocainiaoya.core.parse.visitor.InsertDataCustomVisitor;
+import cn.com.xiaocainiaoya.core.parse.visitor.*;
+import cn.com.xiaocainiaoya.core.parse.visitor.vo.CreateTableVo;
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.FieldVisitorVo;
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.IndexVisitorVo;
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.InsertDataVisitorVo;
@@ -73,6 +71,14 @@ public class ParseHelper {
         FieldCustomVisitor visitor = new FieldCustomVisitor();
         statement.accept(visitor);
         return visitor.getFieldVisitors();
+    }
+
+    public static CreateTableVo createTable(String sql){
+        SQLStatementParser parser = new MySqlStatementParser(sql);
+        SQLStatement statement = parser.parseStatement();
+        CreateTableCustomVisitor visitor = new CreateTableCustomVisitor();
+        statement.accept(visitor);
+        return visitor.getCreateTableVo();
     }
 
     public static List<FieldVisitorVo> getAlterField(String sql){

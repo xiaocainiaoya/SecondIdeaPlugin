@@ -48,6 +48,15 @@ public interface GeneratorHandler {
      */
     String insertFieldBatch(DataConfig config);
 
+    /**
+     * 创建表
+     *
+     * @author jiangjiamin
+     * @date 2023/3/2 20:47:20
+     * @param config
+     * @return: java.lang.String
+     */
+    String createTable(DataConfig config);
 
     /**
      * 修改字段长度、类型等

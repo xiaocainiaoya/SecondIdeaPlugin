@@ -23,6 +23,8 @@ public abstract class AbstractGeneratorHandler implements GeneratorHandler {
 
     protected static String FILE_DESC = "fileDesc";
 
+    protected static String DATA_SCHEMA = "database";
+
     protected static String DEL_SQL = "delSqlList";
 
     protected static String TABLE_NAME = "tableName";
@@ -46,6 +48,11 @@ public abstract class AbstractGeneratorHandler implements GeneratorHandler {
 
     @Override
     public String insertFieldBatch(DataConfig config) {
+        return null;
+    }
+
+    @Override
+    public String createTable(DataConfig config) {
         return null;
     }
 
