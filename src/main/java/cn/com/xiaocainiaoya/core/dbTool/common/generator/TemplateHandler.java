@@ -149,6 +149,9 @@ public class TemplateHandler {
                 case "9":
                     destPath = generatorHandler.createTable(dataConfig);
                     break;
+                case "10":
+                    destPath = generatorHandler.deleteField(dataConfig);
+                    break;
                 default:
                     destPath = generatorHandler.other(dataConfig);
             }

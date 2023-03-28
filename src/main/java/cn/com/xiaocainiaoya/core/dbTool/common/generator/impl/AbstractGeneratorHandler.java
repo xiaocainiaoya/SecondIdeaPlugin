@@ -57,6 +57,11 @@ public abstract class AbstractGeneratorHandler implements GeneratorHandler {
     }
 
     @Override
+    public String deleteField(DataConfig config) {
+        return null;
+    }
+
+    @Override
     public String updateFieldLength(DataConfig config) {
         return null;
     }

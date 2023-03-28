@@ -43,7 +43,19 @@ class ScriptExample extends AbstractScriptTpl {
         return new ArrayList<SqlMeta>() {
             {
                 add(SqlMeta.build("", '''
-                                    ${sql}
+                CREATE TABLE IF NOT EXISTS ${renderFullTableName} (
+            #foreach($item in ${fields})
+            ${item}
+            #end
+    #foreach($item in ${primaryKeys})
+        PRIMARY KEY (${item.keyField}) USING BTREE #if(${otherKeys}),#end
+
+    #end
+            #foreach($item in ${otherKeys})
+            KEY ${item.keyName}(${item.keyField}) USING BTREE #if($foreach.hasNext),#end
+
+            #end
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT= ${tableComment};
                 '''))
             }
         }

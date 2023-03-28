@@ -1,8 +1,10 @@
 package cn.com.xiaocainiaoya.core.parse.visitor;
 
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.CreateTableVo;
+import cn.com.xiaocainiaoya.util.PluginUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.map.MapUtil;
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.druid.sql.ast.statement.SQLColumnDefinition;
 import com.alibaba.druid.sql.ast.statement.SQLSelectOrderByItem;
@@ -23,6 +25,8 @@ public class CreateTableCustomVisitor extends MySqlASTVisitorAdapter {
 
     CreateTableVo createTableVo;
 
+    private String defaultDatabase;
+
     private static String TAB = "\t\t\t\t\t\t\t\t\t";
 
     private static String WRAP_AND_TAB = "\n" + TAB;
@@ -32,6 +36,8 @@ public class CreateTableCustomVisitor extends MySqlASTVisitorAdapter {
     private static String PRIMARY_KEY = WRAP_AND_TAB + "PRIMARY KEY({}) USING {},";
 
     private static String OTHER_KEY = "KEY {} ({}) USING {} COMMENT {},";
+
+    private static String OTHER_KEY_2 = "KEY {} ({}) USING {},";
 
     private static Map<String, String> COMMON_COLUMN_MAP = MapUtil
             .builder("`CREATE_USER_ID`", WRAP_AND_TAB + "`CREATE_USER_ID` varchar(50) DEFAULT NULL COMMENT '创建者id',")
@@ -44,6 +50,9 @@ public class CreateTableCustomVisitor extends MySqlASTVisitorAdapter {
             .put("`ZONE_CODE`", WRAP_AND_TAB + "`ZONE_CODE` varchar(30) NOT NULL COMMENT '区划',")
             .build();
 
+    public CreateTableCustomVisitor(String defaultDatabase) {
+        this.defaultDatabase = defaultDatabase;
+    }
 
     @Override
     public boolean visit(MySqlCreateTableStatement x) {
@@ -97,10 +106,14 @@ public class CreateTableCustomVisitor extends MySqlASTVisitorAdapter {
                 if(key.lastIndexOf(",") == key.length() - 1){
                     key = key.substring(0, key.length() - 1);
                 }
-                otherKey = otherKey + WRAP_AND_TAB + StrUtil.format(OTHER_KEY, mySqlKey.getName(), key, mySqlKey.getIndexType(), mySqlKey.getComment());
+                otherKey = spliceOtherKey(otherKey, mySqlKey, key);
             }
         }
         // 补充通用字段
+        if(columnAndKeyBuilder.length() > 0){
+            // 在补充通用字段之前需要先添加一个逗号
+            columnAndKeyBuilder.append(",");
+        }
         for(String value : commonColumnMap.values()){
             columnAndKeyBuilder.append(value);
         }
@@ -111,26 +124,41 @@ public class CreateTableCustomVisitor extends MySqlASTVisitorAdapter {
             columnAndKey = columnAndKey.substring(0, columnAndKey.length() - 1);
         }
 
-        String database;
-        String tableName;
+        String database = StrUtil.EMPTY;
+        String tableName = StrUtil.EMPTY;
+        String renderFullTableName = StrUtil.EMPTY;
+
         try{
-            String[] split = fullTableName.split("\\.");
-            database = split[0].replace("`", "");
-            tableName = split[1].replace("`", "");
+            // 有的时候创建表的是语句里可能没有写数据库名
+            if(fullTableName.contains(".")){
+                renderFullTableName = fullTableName;
+                String[] split = fullTableName.split("\\.");
+                database = split[0];
+                tableName = split[1];
+            }else{
+                renderFullTableName = PluginUtil.addReverseQuotes(defaultDatabase) + "." + PluginUtil.addReverseQuotes(fullTableName);
+                tableName = fullTableName;
+            }
+
         }catch (Exception e){
             e.printStackTrace();
-            database = "";
-            tableName= "";
         }
 
         createTableVo = CreateTableVo.builder()
-                .sql(StrUtil.format(CREATE_TABLE, fullTableName, columnAndKey, WRAP_AND_TAB, x.getComment()))
-                .fullTableName(fullTableName)
-                .tableName(tableName)
-                .database(database)
+                .sql(StrUtil.format(CREATE_TABLE, renderFullTableName, columnAndKey, WRAP_AND_TAB, x.getComment()))
+                .fullTableName(PluginUtil.removeReverseQuotes(fullTableName))
+                .tableName(PluginUtil.removeReverseQuotes(tableName))
+                .database(PluginUtil.removeReverseQuotes(database))
                 .build();
 
         return true;
+    }
+
+    private String spliceOtherKey(String otherKey, MySqlKey mySqlKey, String key) {
+        if(ObjectUtil.isEmpty(mySqlKey.getComment())){
+            return otherKey + WRAP_AND_TAB + StrUtil.format(OTHER_KEY_2, mySqlKey.getName(), key, mySqlKey.getIndexType());
+        }
+        return otherKey + WRAP_AND_TAB + StrUtil.format(OTHER_KEY, mySqlKey.getName(), key, mySqlKey.getIndexType(), mySqlKey.getComment());
     }
 
     public CreateTableVo getCreateTableVo() {

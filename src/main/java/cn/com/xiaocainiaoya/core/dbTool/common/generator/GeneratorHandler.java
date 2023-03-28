@@ -59,6 +59,16 @@ public interface GeneratorHandler {
     String createTable(DataConfig config);
 
     /**
+     * 删除字段
+     *
+     * @author jiangjiamin
+     * @date 2023/3/28 15:02:18
+     * @param config
+     * @return: java.lang.String
+     */
+    String deleteField(DataConfig config);
+
+    /**
      * 修改字段长度、类型等
      *
      * @author jiangjiamin

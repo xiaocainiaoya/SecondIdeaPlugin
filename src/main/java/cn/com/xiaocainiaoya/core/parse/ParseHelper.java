@@ -1,10 +1,7 @@
 package cn.com.xiaocainiaoya.core.parse;
 
 import cn.com.xiaocainiaoya.core.parse.visitor.*;
-import cn.com.xiaocainiaoya.core.parse.visitor.vo.CreateTableVo;
-import cn.com.xiaocainiaoya.core.parse.visitor.vo.FieldVisitorVo;
-import cn.com.xiaocainiaoya.core.parse.visitor.vo.IndexVisitorVo;
-import cn.com.xiaocainiaoya.core.parse.visitor.vo.InsertDataVisitorVo;
+import cn.com.xiaocainiaoya.core.parse.visitor.vo.*;
 import cn.com.xiaocainiaoya.core.parse.vo.TableDetailInfo;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.dialect.mysql.parser.MySqlStatementParser;
@@ -67,16 +64,25 @@ public class ParseHelper {
 
     public static List<FieldVisitorVo> getField(String sql){
         SQLStatementParser parser = new MySqlStatementParser(sql);
+
         SQLStatement statement = parser.parseStatement();
         FieldCustomVisitor visitor = new FieldCustomVisitor();
         statement.accept(visitor);
         return visitor.getFieldVisitors();
     }
 
-    public static CreateTableVo createTable(String sql){
+    public static CreateTableVo createTable(String sql, String defaultDataBaseName){
         SQLStatementParser parser = new MySqlStatementParser(sql);
         SQLStatement statement = parser.parseStatement();
-        CreateTableCustomVisitor visitor = new CreateTableCustomVisitor();
+        CreateTableCustomVisitor visitor = new CreateTableCustomVisitor(defaultDataBaseName);
+        statement.accept(visitor);
+        return visitor.getCreateTableVo();
+    }
+
+    public static NewCreateTableVo newCreateTable(String sql, String defaultDataBaseName){
+        SQLStatementParser parser = new MySqlStatementParser(sql);
+        SQLStatement statement = parser.parseStatement();
+        NewCreateTableCustomVisitor visitor = new NewCreateTableCustomVisitor(defaultDataBaseName);
         statement.accept(visitor);
         return visitor.getCreateTableVo();
     }
@@ -85,6 +91,14 @@ public class ParseHelper {
         SQLStatementParser parser = new MySqlStatementParser(sql);
         SQLStatement statement = parser.parseStatement();
         AlterFieldCustomVisitor visitor = new AlterFieldCustomVisitor();
+        statement.accept(visitor);
+        return visitor.getFieldVisitors();
+    }
+
+    public static List<DeleteFieldVo> getDeleteFiled(String sql){
+        SQLStatementParser parser = new MySqlStatementParser(sql);
+        SQLStatement statement = parser.parseStatement();
+        DeleteFieldCustomVisitor visitor = new DeleteFieldCustomVisitor();
         statement.accept(visitor);
         return visitor.getFieldVisitors();
     }

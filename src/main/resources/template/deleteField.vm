@@ -42,9 +42,12 @@ class ScriptExample extends AbstractScriptTpl {
     List<SqlMeta> mainSql() {
         return new ArrayList<SqlMeta>() {
             {
-                add(SqlMeta.build("", '''
-                                    ${sql}
-                '''))
+#foreach($item in $sqlList)
+                add(SqlMeta.build("SELECT EXISTS ( SELECT * FROM `information_schema`.`COLUMNS` WHERE `table_schema` = '${database}' AND table_name = '${item.tableName}' AND column_name = '${item.columnName}' )",
+                    ''' ALTER TABLE ${item.fullTableName} DROP COLUMN ${item.field}; '''
+                ))
+#end
+
             }
         }
     }

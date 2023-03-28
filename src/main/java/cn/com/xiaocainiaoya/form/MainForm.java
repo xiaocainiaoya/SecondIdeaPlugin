@@ -13,7 +13,6 @@ import cn.com.xiaocainiaoya.core.dbTool.common.generator.vo.StepInfoVo;
 import cn.com.xiaocainiaoya.core.dbTool.core.DbConfig;
 import cn.com.xiaocainiaoya.core.dbTool.util.ConfigUtil;
 import cn.com.xiaocainiaoya.enums.ButtonEnum;
-import cn.com.xiaocainiaoya.enums.RedioMessageEnum;
 import cn.com.xiaocainiaoya.listener.RadioListener;
 import cn.com.xiaocainiaoya.vo.ConfigFileInfoVo;
 import cn.hutool.core.date.DateUtil;
@@ -121,6 +120,7 @@ public class MainForm {
     private JButton generatorNoExecButton;
     private JPanel buttonThreePanel;
     private JRadioButton createTableButton;
+    private JRadioButton deleteFieldButton;
 
     private Project project;
 
@@ -194,7 +194,8 @@ public class MainForm {
      * @return: void
      */
     private void radioListenerHandle(){
-        List<JRadioButton> radioButtons = Lists.newArrayList(batchRadio, insertFieldRadio, updateFieldRadio, addIndexRedio, updateIndexRedio, mulSqlRedio, createTableButton);
+        List<JRadioButton> radioButtons = Lists.newArrayList(batchRadio, insertFieldRadio, updateFieldRadio,
+                addIndexRedio, updateIndexRedio, mulSqlRedio, createTableButton, deleteFieldButton);
         RadioListener.setRadioListener(radioButtons, sqlTextArea);
     }
 
@@ -230,6 +231,9 @@ public class MainForm {
         }
         if(createTableButton.isSelected()){
             return "9";
+        }
+        if(deleteFieldButton.isSelected()){
+            return "10";
         }
         return null;
     }
@@ -565,27 +569,27 @@ public class MainForm {
 
     private void sqlTextAreaListener(){
 
-        sqlTextArea.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                //当点击输入框时，里面的内容为提示信息时，清空内容，将其字体颜色设置为正常黑色。
-                if(sqlTextArea.getText().startsWith("示例")){
-                    sqlTextArea.setText("");
-                    sqlTextArea.setForeground(Color.white);
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                //当失去焦点时，判断是否为空，若为空时，直接显示提示信息，设置颜色
-
-                String message = RedioMessageEnum.getValueByRadio(getRadioCodeValue());
-                if(StrUtil.isBlank(sqlTextArea.getText())){
-                    sqlTextArea.setText(message);
-                    sqlTextArea.setForeground(new Color(142,142,142));
-                }
-            }
-        });
+//        sqlTextArea.addFocusListener(new FocusListener() {
+//            @Override
+//            public void focusGained(FocusEvent e) {
+//                //当点击输入框时，里面的内容为提示信息时，清空内容，将其字体颜色设置为正常黑色。
+//                if(sqlTextArea.getText().startsWith("示例")){
+//                    sqlTextArea.setText("");
+//                    sqlTextArea.setForeground(Color.white);
+//                }
+//            }
+//
+//            @Override
+//            public void focusLost(FocusEvent e) {
+//                //当失去焦点时，判断是否为空，若为空时，直接显示提示信息，设置颜色
+//
+//                String message = RedioMessageEnum.getValueByRadio(getRadioCodeValue());
+//                if(StrUtil.isBlank(sqlTextArea.getText())){
+//                    sqlTextArea.setText(message);
+//                    sqlTextArea.setForeground(new Color(142,142,142));
+//                }
+//            }
+//        });
     }
 
     /**

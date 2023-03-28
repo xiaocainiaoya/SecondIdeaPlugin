@@ -2,12 +2,12 @@ package cn.com.xiaocainiaoya.core.dbTool.common.generator.impl;
 
 import cn.com.xiaocainiaoya.core.dbTool.common.generator.GeneratorBuilder;
 import cn.com.xiaocainiaoya.core.dbTool.common.generator.vo.DataConfig;
+import cn.com.xiaocainiaoya.core.dbTool.common.generator.vo.DeleteFieldHandleVo;
 import cn.com.xiaocainiaoya.core.dbTool.common.generator.vo.HandleVo;
 import cn.com.xiaocainiaoya.core.parse.ParseHelper;
-import cn.com.xiaocainiaoya.core.parse.visitor.vo.CreateTableVo;
-import cn.com.xiaocainiaoya.core.parse.visitor.vo.FieldVisitorVo;
-import cn.com.xiaocainiaoya.core.parse.visitor.vo.IndexVisitorVo;
-import cn.com.xiaocainiaoya.core.parse.visitor.vo.InsertDataVisitorVo;
+import cn.com.xiaocainiaoya.core.parse.visitor.vo.*;
+import cn.com.xiaocainiaoya.util.PluginUtil;
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.ListUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
@@ -41,7 +41,7 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
         List<String> resultSqlList = new ArrayList<>();
         for(String sql : sqls){
             // 最后一行为换行符的情况
-            if("\n".equals(sql)){
+            if(!PluginUtil.invalidSql(sql)){
                 continue;
             }
             // 每一条sql开头为换行符的情况
@@ -98,7 +98,12 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
         List<HandleVo> handleList = ListUtil.list(false);
 
         for(int i = 0; i < sqls.length; i++){
-            List<FieldVisitorVo> fieldVisitors = ParseHelper.getField(sqls[i]);
+            String sql = sqls[i];
+            System.out.println("当前处理的sql为: " + sql);
+            if(!PluginUtil.invalidSql(sql)){
+                continue;
+            }
+            List<FieldVisitorVo> fieldVisitors = ParseHelper.getField(sql);
 
             for(FieldVisitorVo fieldVisitor : fieldVisitors){
                  HandleVo handleVo =  HandleVo.builder()
@@ -117,14 +122,19 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
 
     @Override
     public String createTable(DataConfig config) {
-        CreateTableVo createTableVo = ParseHelper.createTable(config.getSql());
+        //CreateTableVo createTableVo = ParseHelper.createTable(config.getSql(), config.getDatabase());
+        NewCreateTableVo createTableVo = ParseHelper.newCreateTable(config.getSql(), config.getDatabase());
+        // 如果建表语句中没有写数据库名，则中config中获取数据库名
+        if(StrUtil.isEmpty(createTableVo.getDatabase())){
+            createTableVo.setDatabase(config.getDatabase());
+        }
 
-        Map<String, Object> dataMap = MapUtil.of(SQL, createTableVo.getSql());
+        Map<String, Object> dataMap = BeanUtil.beanToMap(createTableVo);
         //dataMap.put(TABLE_NAME, handleList.get(0).getTableName());
         dataMap.put(FILE_DESC, config.getFileName());
         dataMap.put(DATA_SCHEMA, createTableVo.getDatabase());
         dataMap.put(TABLE_NAME, createTableVo.getTableName());
-        return generatorBuilder.render("buildTable.vm", dataMap, config);
+        return generatorBuilder.render("newBuildTable.vm", dataMap, config);
     }
 
     @Override
@@ -132,6 +142,9 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
         String[] sqls = config.getSql().split(";");
         List<HandleVo> handleList = ListUtil.list(false);
         for(int i = 0; i < sqls.length; i++){
+            if(!PluginUtil.invalidSql(sqls[i])){
+                continue;
+            }
             List<FieldVisitorVo> fieldVisitors = ParseHelper.getAlterField(sqls[i]);
 
             for(FieldVisitorVo fieldVisitor : fieldVisitors){
@@ -151,11 +164,44 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
     }
 
     @Override
+    public String deleteField(DataConfig config) {
+        String[] sqls = config.getSql().split(";");
+        List<DeleteFieldHandleVo> handleList = ListUtil.list(false);
+        for(int i = 0; i < sqls.length; i++){
+            if(!PluginUtil.invalidSql(sqls[i])){
+                continue;
+            }
+            List<DeleteFieldVo> fieldVisitors = ParseHelper.getDeleteFiled(sqls[i]);
+            for(DeleteFieldVo deleteFieldVo : fieldVisitors){
+                if(!deleteFieldVo.getFullTableName().contains(".")){
+                    deleteFieldVo.setFullTableName(config.getDatabase() + "." + deleteFieldVo.getFullTableName());
+                }
+
+                DeleteFieldHandleVo handleVo =  DeleteFieldHandleVo.builder()
+                        .field(deleteFieldVo.getField())
+                        .fullTableName(deleteFieldVo.getFullTableName())
+                        .tableName(deleteFieldVo.getTableName().toString().replace("`", ""))
+                        .columnName(deleteFieldVo.getField().toString().replace("`", ""))
+                        .build();
+                handleList.add(handleVo);
+            }
+        }
+        Map<String, Object> dataMap = MapUtil.of(SQL_LIST, handleList);
+        dataMap.put(TABLE_NAME, handleList.get(0).getTableName());
+        dataMap.put(FILE_DESC, config.getFileName());
+
+        return generatorBuilder.render("deleteField.vm", dataMap, config);
+    }
+
+    @Override
     public String insertIndex(DataConfig config) {
         String[] sqls = config.getSql().split(";");
         List<HandleVo> handleList = ListUtil.list(false);
 
         for(int i = 0; i < sqls.length; i++){
+            if(!PluginUtil.invalidSql(sqls[i])){
+                continue;
+            }
             List<IndexVisitorVo> indexVisitors = ParseHelper.getIndex(sqls[i]);
 
             for(IndexVisitorVo indexVisitor : indexVisitors){
@@ -180,6 +226,9 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
         List<HandleVo> handleList = ListUtil.list(false);
 
         for(int i = 0; i < sqls.length; i++){
+            if(!PluginUtil.invalidSql(sqls[i])){
+                continue;
+            }
             List<IndexVisitorVo> indexVisitors = ParseHelper.getIndex(sqls[i]);
 
             for(IndexVisitorVo indexVisitor : indexVisitors){
