@@ -120,6 +120,19 @@ public class DruidGeneratorHandler extends AbstractGeneratorHandler {
         return generatorBuilder.render("insertFieldBatch.vm", dataMap, config);
     }
 
+    /**
+     * 创建表语句：
+     *  渲染模板数据分为四个部分：
+     *      1. 全路径表名：`xxx`.`xxx`
+     *      2. 字段域
+     *      3. 主键域
+     *      4. 非主键索引域
+     *
+     * @author jiangjiamin
+     * @date 2023/3/29 09:54:17
+     * @param config
+     * @return: java.lang.String
+     */
     @Override
     public String createTable(DataConfig config) {
         //CreateTableVo createTableVo = ParseHelper.createTable(config.getSql(), config.getDatabase());

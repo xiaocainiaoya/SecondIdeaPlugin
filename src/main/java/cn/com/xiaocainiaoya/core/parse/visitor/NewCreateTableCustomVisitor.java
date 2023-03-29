@@ -2,9 +2,11 @@ package cn.com.xiaocainiaoya.core.parse.visitor;
 
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.NewCreateTableVo;
 import cn.com.xiaocainiaoya.core.parse.visitor.vo.TableKey;
+import cn.com.xiaocainiaoya.enums.ErrorEnum;
 import cn.com.xiaocainiaoya.util.PluginUtil;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
+import cn.hutool.core.lang.Assert;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.druid.sql.ast.statement.SQLColumnDefinition;
@@ -107,7 +109,7 @@ public class NewCreateTableCustomVisitor extends MySqlASTVisitorAdapter {
         }catch (Exception e){
             e.printStackTrace();
         }
-
+        Assert.notNull(x.getComment(), ErrorEnum.COMMENT_IS_EMPTY.getValue());
         createTableVo = NewCreateTableVo.builder()
                 .renderFullTableName(renderFullTableName)
                 .fullTableName(PluginUtil.removeReverseQuotes(fullTableName))
@@ -118,9 +120,7 @@ public class NewCreateTableCustomVisitor extends MySqlASTVisitorAdapter {
                 .fields(fields)
                 .tableComment(x.getComment().toString())
                 .build();
-        if(StrUtil.isEmpty(x.getComment().toString())){
-            throw new RuntimeException("你干嘛不写表注释啊！！！");
-        }
+
 
         return true;
     }
