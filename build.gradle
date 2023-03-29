@@ -45,4 +45,10 @@ test {
 
 jar {
     enabled = true
+    rootProject.version = releaseTime() + "-" + getVersion()
 }
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("GMT+08:00"))
+}
+
