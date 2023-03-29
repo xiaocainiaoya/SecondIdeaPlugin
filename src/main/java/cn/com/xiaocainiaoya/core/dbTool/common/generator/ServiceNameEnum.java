@@ -16,6 +16,7 @@ public enum ServiceNameEnum {
     GPX_CONTRACT("gpx_contract","合同服务"),
 
     GPE_EVALUATION("gpe_evaluation","评标服务"),
+    GPE_ARCHIVE("gpe_archive","电子归档"),
 
     ;
     private String code;
